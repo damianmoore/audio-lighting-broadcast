@@ -1,0 +1,415 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-PU U1
+U 1 1 5E0A409F
+P 4100 3550
+F 0 "U1" H 3456 3596 50  0000 R CNN
+F 1 "ATmega328P-PU" H 3456 3505 50  0000 R CNN
+F 2 "Package_DIP:DIP-28_W7.62mm" H 4100 3550 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 4100 3550 50  0001 C CNN
+	1    4100 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L RF:NRF24L01_Breakout U2
+U 1 1 5E0A9701
+P 7650 2600
+F 0 "U2" H 8030 2646 50  0000 L CNN
+F 1 "NRF24L01_Breakout" H 8030 2555 50  0000 L CNN
+F 2 "RF_Module:nRF24L01_Breakout" H 7800 3200 50  0001 L CIN
+F 3 "http://www.nordicsemi.com/eng/content/download/2730/34105/file/nRF24L01_Product_Specification_v2_0.pdf" H 7650 2500 50  0001 C CNN
+	1    7650 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Crystal Y1
+U 1 1 5E0AA821
+P 5350 3000
+F 0 "Y1" V 5304 3131 50  0000 L CNN
+F 1 "Crystal" V 5395 3131 50  0000 L CNN
+F 2 "Crystal:Crystal_HC18-U_Vertical" H 5350 3000 50  0001 C CNN
+F 3 "~" H 5350 3000 50  0001 C CNN
+	1    5350 3000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4700 3050 5100 3050
+Wire Wire Line
+	5100 3050 5100 3150
+Wire Wire Line
+	5100 3150 5350 3150
+Wire Wire Line
+	4700 2950 5100 2950
+Wire Wire Line
+	5100 2950 5100 2850
+Wire Wire Line
+	5100 2850 5350 2850
+$Comp
+L power:GND #PWR0101
+U 1 1 5E0ABD8B
+P 6150 3250
+F 0 "#PWR0101" H 6150 3000 50  0001 C CNN
+F 1 "GND" H 6155 3077 50  0000 C CNN
+F 2 "" H 6150 3250 50  0001 C CNN
+F 3 "" H 6150 3250 50  0001 C CNN
+	1    6150 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5E0AC642
+P 4100 5200
+F 0 "#PWR0102" H 4100 4950 50  0001 C CNN
+F 1 "GND" H 4105 5027 50  0000 C CNN
+F 2 "" H 4100 5200 50  0001 C CNN
+F 3 "" H 4100 5200 50  0001 C CNN
+	1    4100 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 5050 4100 5200
+$Comp
+L power:GND #PWR0103
+U 1 1 5E0AD738
+P 7650 3350
+F 0 "#PWR0103" H 7650 3100 50  0001 C CNN
+F 1 "GND" H 7655 3177 50  0000 C CNN
+F 2 "" H 7650 3350 50  0001 C CNN
+F 3 "" H 7650 3350 50  0001 C CNN
+	1    7650 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7650 3200 7650 3350
+$Comp
+L Connector_Generic:Conn_01x02 J1
+U 1 1 5E0AE544
+P 1500 1800
+F 0 "J1" H 1418 1475 50  0000 C CNN
+F 1 "Conn_01x02" H 1418 1566 50  0000 C CNN
+F 2 "Connector_Wire:SolderWirePad_1x02_P3.81mm_Drill1mm" H 1500 1800 50  0001 C CNN
+F 3 "~" H 1500 1800 50  0001 C CNN
+	1    1500 1800
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 5E0B2601
+P 5850 2850
+F 0 "C2" V 5598 2850 50  0000 C CNN
+F 1 "C" V 5689 2850 50  0000 C CNN
+F 2 "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm" H 5888 2700 50  0001 C CNN
+F 3 "~" H 5850 2850 50  0001 C CNN
+	1    5850 2850
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 5E0B2AB6
+P 5850 3150
+F 0 "C3" V 6050 3150 50  0000 C CNN
+F 1 "C" V 6150 3150 50  0000 C CNN
+F 2 "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm" H 5888 3000 50  0001 C CNN
+F 3 "~" H 5850 3150 50  0001 C CNN
+	1    5850 3150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5700 2850 5350 2850
+Connection ~ 5350 2850
+Wire Wire Line
+	5350 3150 5700 3150
+Connection ~ 5350 3150
+Wire Wire Line
+	6000 2850 6150 2850
+Wire Wire Line
+	6150 2850 6150 3150
+Wire Wire Line
+	6000 3150 6150 3150
+Connection ~ 6150 3150
+Wire Wire Line
+	6150 3150 6150 3250
+Text GLabel 2900 1700 2    50   Input ~ 0
+VCC
+Wire Wire Line
+	1900 1800 1700 1800
+$Comp
+L power:GND #PWR0104
+U 1 1 5E0BD94A
+P 1900 1800
+F 0 "#PWR0104" H 1900 1550 50  0001 C CNN
+F 1 "GND" H 1905 1627 50  0000 C CNN
+F 2 "" H 1900 1800 50  0001 C CNN
+F 3 "" H 1900 1800 50  0001 C CNN
+	1    1900 1800
+	1    0    0    -1  
+$EndComp
+Text GLabel 4100 1400 1    50   Input ~ 0
+VCC
+$Comp
+L Device:C C1
+U 1 1 5E0C243A
+P 4250 1800
+F 0 "C1" V 3998 1800 50  0000 C CNN
+F 1 "C" V 4089 1800 50  0000 C CNN
+F 2 "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm" H 4288 1650 50  0001 C CNN
+F 3 "~" H 4250 1800 50  0001 C CNN
+	1    4250 1800
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 5E0C2B9A
+P 4550 1800
+F 0 "#PWR0105" H 4550 1550 50  0001 C CNN
+F 1 "GND" H 4555 1627 50  0000 C CNN
+F 2 "" H 4550 1800 50  0001 C CNN
+F 3 "" H 4550 1800 50  0001 C CNN
+	1    4550 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4400 1800 4550 1800
+Wire Wire Line
+	4100 1400 4100 1800
+Connection ~ 4100 1800
+Wire Wire Line
+	4100 1800 4100 2050
+Text GLabel 7650 1350 1    50   Input ~ 0
+VCC
+$Comp
+L Device:C C4
+U 1 1 5E0D1105
+P 7800 1750
+F 0 "C4" V 7548 1750 50  0000 C CNN
+F 1 "C" V 7639 1750 50  0000 C CNN
+F 2 "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm" H 7838 1600 50  0001 C CNN
+F 3 "~" H 7800 1750 50  0001 C CNN
+	1    7800 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 5E0D110B
+P 8100 1750
+F 0 "#PWR0106" H 8100 1500 50  0001 C CNN
+F 1 "GND" H 8105 1577 50  0000 C CNN
+F 2 "" H 8100 1750 50  0001 C CNN
+F 3 "" H 8100 1750 50  0001 C CNN
+	1    8100 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7950 1750 8100 1750
+Wire Wire Line
+	7650 1350 7650 1750
+Connection ~ 7650 1750
+Wire Wire Line
+	7650 1750 7650 2000
+$Comp
+L Transistor_BJT:BCP56 Q1
+U 1 1 5E0D3932
+P 9500 5000
+F 0 "Q1" H 9691 5046 50  0000 L CNN
+F 1 "BCP56" H 9691 4955 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 9700 4925 50  0001 L CIN
+F 3 "http://cache.nxp.com/documents/data_sheet/BCP56_BCX56_BC56PA.pdf?pspll=1" H 9500 5000 50  0001 L CNN
+	1    9500 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5E0D40E8
+P 9600 5350
+F 0 "R1" H 9670 5396 50  0000 L CNN
+F 1 "R" H 9670 5305 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 9530 5350 50  0001 C CNN
+F 3 "~" H 9600 5350 50  0001 C CNN
+	1    9600 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 5E0D4FBB
+P 9800 5900
+F 0 "#PWR0107" H 9800 5650 50  0001 C CNN
+F 1 "GND" H 9805 5727 50  0000 C CNN
+F 2 "" H 9800 5900 50  0001 C CNN
+F 3 "" H 9800 5900 50  0001 C CNN
+	1    9800 5900
+	1    0    0    -1  
+$EndComp
+Text GLabel 9600 4800 1    50   Input ~ 0
+VCC
+$Comp
+L Device:LED_RGBC D1
+U 1 1 5E0D6B6D
+P 9800 5700
+F 0 "D1" V 9846 5370 50  0000 R CNN
+F 1 "LED_RGBC" V 9755 5370 50  0000 R CNN
+F 2 "Connector_Wire:SolderWirePad_1x04_P3.175mm_Drill0.8mm" H 9800 5650 50  0001 C CNN
+F 3 "~" H 9800 5650 50  0001 C CNN
+	1    9800 5700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5E0E333F
+P 9800 5350
+F 0 "R2" H 9870 5396 50  0000 L CNN
+F 1 "R" H 9870 5305 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 9730 5350 50  0001 C CNN
+F 3 "~" H 9800 5350 50  0001 C CNN
+	1    9800 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 5E0E38C8
+P 10000 5350
+F 0 "R3" H 10070 5396 50  0000 L CNN
+F 1 "R" H 10070 5305 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 9930 5350 50  0001 C CNN
+F 3 "~" H 10000 5350 50  0001 C CNN
+	1    10000 5350
+	1    0    0    -1  
+$EndComp
+Text GLabel 9300 5000 0    50   Input ~ 0
+Red
+Text GLabel 4900 4350 2    50   Input ~ 0
+Red
+Wire Wire Line
+	4900 4350 4700 4350
+Text GLabel 4900 4550 2    50   Input ~ 0
+Green
+Wire Wire Line
+	4900 4550 4700 4550
+Text GLabel 4900 4650 2    50   Input ~ 0
+Blue
+Wire Wire Line
+	4700 4650 4900 4650
+$Comp
+L Transistor_BJT:BCP56 Q2
+U 1 1 5E0F22C8
+P 9700 4400
+F 0 "Q2" H 9891 4446 50  0000 L CNN
+F 1 "BCP56" H 9891 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 9900 4325 50  0001 L CIN
+F 3 "http://cache.nxp.com/documents/data_sheet/BCP56_BCX56_BC56PA.pdf?pspll=1" H 9700 4400 50  0001 L CNN
+	1    9700 4400
+	1    0    0    -1  
+$EndComp
+Text GLabel 9800 4200 1    50   Input ~ 0
+VCC
+$Comp
+L Transistor_BJT:BCP56 Q3
+U 1 1 5E0F3320
+P 9900 3800
+F 0 "Q3" H 10091 3846 50  0000 L CNN
+F 1 "BCP56" H 10091 3755 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 10100 3725 50  0001 L CIN
+F 3 "http://cache.nxp.com/documents/data_sheet/BCP56_BCX56_BC56PA.pdf?pspll=1" H 9900 3800 50  0001 L CNN
+	1    9900 3800
+	1    0    0    -1  
+$EndComp
+Text GLabel 10000 3600 1    50   Input ~ 0
+VCC
+Wire Wire Line
+	9800 4600 9800 5200
+Wire Wire Line
+	10000 4000 10000 5200
+Text GLabel 9500 4400 0    50   Input ~ 0
+Green
+Text GLabel 9700 3800 0    50   Input ~ 0
+Blue
+Text GLabel 4700 2450 2    50   Input ~ 0
+Radio1
+Text GLabel 4700 2550 2    50   Input ~ 0
+Radio2
+Text GLabel 4700 2650 2    50   Input ~ 0
+Radio3
+Text GLabel 4700 2750 2    50   Input ~ 0
+Radio4
+Text GLabel 4700 2850 2    50   Input ~ 0
+Radio5
+Text GLabel 7150 2800 0    50   Input ~ 0
+Radio1
+Text GLabel 7150 2600 0    50   Input ~ 0
+Radio2
+Text GLabel 7150 2300 0    50   Input ~ 0
+Radio3
+Text GLabel 7150 2400 0    50   Input ~ 0
+Radio4
+Text GLabel 7150 2500 0    50   Input ~ 0
+Radio5
+$Comp
+L Switch:SW_SPST SW2
+U 1 1 5E1085D0
+P 5650 4250
+F 0 "SW2" H 5650 4485 50  0000 C CNN
+F 1 "SW_SPST" H 5650 4394 50  0000 C CNN
+F 2 "Connector_Wire:SolderWirePad_1x02_P3.81mm_Drill1mm" H 5650 4250 50  0001 C CNN
+F 3 "~" H 5650 4250 50  0001 C CNN
+	1    5650 4250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5450 4250 4700 4250
+$Comp
+L power:GND #PWR0108
+U 1 1 5E110697
+P 5950 4350
+F 0 "#PWR0108" H 5950 4100 50  0001 C CNN
+F 1 "GND" H 5955 4177 50  0000 C CNN
+F 2 "" H 5950 4350 50  0001 C CNN
+F 3 "" H 5950 4350 50  0001 C CNN
+	1    5950 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 4250 5950 4250
+Wire Wire Line
+	5950 4250 5950 4350
+$Comp
+L Switch:SW_SPST SW1
+U 1 1 5E113D13
+P 2600 1700
+F 0 "SW1" H 2600 1935 50  0000 C CNN
+F 1 "SW_SPST" H 2600 1844 50  0000 C CNN
+F 2 "Connector_Wire:SolderWirePad_1x02_P3.81mm_Drill1mm" H 2600 1700 50  0001 C CNN
+F 3 "~" H 2600 1700 50  0001 C CNN
+	1    2600 1700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 1700 2800 1700
+$Comp
+L Device:Polyfuse F1
+U 1 1 5E11C893
+P 2050 1700
+F 0 "F1" V 1825 1700 50  0000 C CNN
+F 1 "Polyfuse" V 1916 1700 50  0000 C CNN
+F 2 "Crystal:Crystal_HC18-U_Vertical" H 2100 1500 50  0001 L CNN
+F 3 "~" H 2050 1700 50  0001 C CNN
+	1    2050 1700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2400 1700 2200 1700
+Wire Wire Line
+	1900 1700 1700 1700
+$EndSCHEMATC
