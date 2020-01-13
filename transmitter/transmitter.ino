@@ -5,8 +5,8 @@
 #define pinAnalog A0
 #define pinReset A2
 #define pinStrobe A3
-#define MSGEQ7_INTERVAL ReadsPerSecond(50)
-#define MSGEQ7_SMOOTH 20 // Range: 0-255
+#define MSGEQ7_INTERVAL ReadsPerSecond(400)
+#define MSGEQ7_SMOOTH 64 // Range: 0-255
 
 CMSGEQ7<MSGEQ7_SMOOTH, pinReset, pinStrobe, pinAnalog> MSGEQ7;
 
@@ -40,10 +40,22 @@ struct RadioPacket // Any packet up to 32 bytes can be sent.
 NRFLite _radio;
 RadioPacket _radioData;
 
-//float colors[3] = {0.36, 0, 1};
-float bassColors[3] = {0, 1, 1};
-float midColors[3] = {1, 0.5, 0};
-float trebColors[3] = {1, 0, 1};
+uint8_t bassVal = 0;
+uint8_t midVal = 0;
+uint8_t trebVal = 0;
+uint8_t bassScaled = 0;
+uint8_t midScaled = 0;
+uint8_t trebScaled = 0;
+
+float bassColors[3] = {0, 1, 0.5};
+float midColors[3] = {1, 0.05, 0};
+float trebColors[3] = {1, 0, 0.5};
+
+uint16_t maxLevels[3] = {0, 0, 0};
+float levelMultipliers[3] = {1.0, 1.0, 1.0};
+uint32_t lastMultiplierTime = 0;
+
+uint16_t lastMillis = 0;
 
 
 int remapNoise(int val) {
@@ -73,8 +85,30 @@ int remapColor(int channel, int val, int color) {
   }
 }
 
+void calculateMultipliers() {
+  Serial.println(maxLevels[0]);
+  Serial.println(maxLevels[1]);
+  Serial.println(maxLevels[2]);
+  levelMultipliers[0] = (255.0 / maxLevels[0]) * 1;
+  levelMultipliers[1] = (255.0 / maxLevels[1]) * 1.5;
+  levelMultipliers[2] = (255.0 / maxLevels[2]) * 3;
+  Serial.println(levelMultipliers[0]);
+  Serial.println(levelMultipliers[1]);
+  Serial.println(levelMultipliers[2]);
+  maxLevels[0] = 0;
+  maxLevels[1] = 0;
+  maxLevels[2] = 0;
+  lastMultiplierTime = millis();
+}
+
+void scaleValues() {
+
+}
+
 
 void setup() {
+  Serial.begin(115200);
+
   // This will set the IC ready for reading
   MSGEQ7.begin();
 
@@ -87,6 +121,8 @@ void setup() {
       Serial.println("Cannot communicate with radio");
       while (1); // Wait here forever.
   }
+
+  lastMultiplierTime = millis();
 }
 
 
@@ -97,29 +133,45 @@ void loop() {
   // Led output
   if (newReading) {
 
-    // Read bass frequency
-    uint8_t bassVal = MSGEQ7.get(MSGEQ7_0);
-    uint8_t midVal = MSGEQ7.get(MSGEQ7_3);
-    uint8_t trebVal = MSGEQ7.get(MSGEQ7_5);
+    // Read frequencies
+    bassVal = max(MSGEQ7.get(MSGEQ7_0), MSGEQ7.get(MSGEQ7_1));
+    midVal = max(MSGEQ7.get(MSGEQ7_3), MSGEQ7.get(MSGEQ7_4));
+    trebVal = max(MSGEQ7.get(MSGEQ7_5), MSGEQ7.get(MSGEQ7_6));
+
     bassVal = remapNoise(bassVal);
     midVal = remapNoise(midVal);
     trebVal = remapNoise(trebVal);
 
+    bassScaled = bassVal * levelMultipliers[0];
+    midScaled = midVal * levelMultipliers[1];
+    trebScaled = trebVal * levelMultipliers[2];
+
     // Output PWM signal via LED to the music beat
     analogWrite(pinLed, bassVal);
 
-    _radioData.BassRed = remapColor(0, bassVal, 0);
-    _radioData.BassGreen = remapColor(0, bassVal, 1);
-    _radioData.BassBlue = remapColor(0, bassVal, 2);
+    _radioData.BassRed = remapColor(0, bassScaled, 0);
+    _radioData.BassGreen = remapColor(0, bassScaled, 1);
+    _radioData.BassBlue = remapColor(0, bassScaled, 2);
 
-    _radioData.MidRed = remapColor(1, midVal, 0);
-    _radioData.MidGreen = remapColor(1, midVal, 1);
-    _radioData.MidBlue = remapColor(1, midVal, 2);
+    _radioData.MidRed = remapColor(1, midScaled, 0);
+    _radioData.MidGreen = remapColor(1, midScaled, 1);
+    _radioData.MidBlue = remapColor(1, midScaled, 2);
 
-    _radioData.TrebRed = remapColor(2, trebVal, 0);
-    _radioData.TrebGreen = remapColor(2, trebVal, 1);
-    _radioData.TrebBlue = remapColor(2, trebVal, 2);
+    _radioData.TrebRed = remapColor(2, trebScaled, 0);
+    _radioData.TrebGreen = remapColor(2, trebScaled, 1);
+    _radioData.TrebBlue = remapColor(2, trebScaled, 2);
 
     _radio.send(DESTINATION_RADIO_ID, &_radioData, sizeof(_radioData), NRFLite::NO_ACK);
+
+    maxLevels[0] = max(maxLevels[0], bassVal);
+    maxLevels[1] = max(maxLevels[1], bassVal);
+    maxLevels[2] = max(maxLevels[2], bassVal);
+
+    if (millis() - lastMultiplierTime > 30000) {
+      calculateMultipliers();
+    }
+
+//    Serial.println(millis() - lastMillis);
+//    lastMillis = millis();
   }
 }
