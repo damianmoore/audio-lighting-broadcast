@@ -5,7 +5,7 @@
 #define pinAnalog A0
 #define pinReset A2
 #define pinStrobe A3
-#define MSGEQ7_INTERVAL ReadsPerSecond(400)
+#define MSGEQ7_INTERVAL ReadsPerSecond(200)
 #define MSGEQ7_SMOOTH 64 // Range: 0-255
 
 CMSGEQ7<MSGEQ7_SMOOTH, pinReset, pinStrobe, pinAnalog> MSGEQ7;
@@ -62,10 +62,10 @@ int remapNoise(int val) {
   // Adjusted for visual effect
   val = mapNoise(val);
 
-  if (val < 10) {
+  if (val < 30) {
     val = 0;
   }
-  if (val < 20) {
+  if (val < 60) {
     val = val / 2;
   }
 
@@ -134,9 +134,9 @@ void loop() {
   if (newReading) {
 
     // Read frequencies
-    bassVal = max(MSGEQ7.get(MSGEQ7_0), MSGEQ7.get(MSGEQ7_1));
-    midVal = max(MSGEQ7.get(MSGEQ7_3), MSGEQ7.get(MSGEQ7_4));
-    trebVal = max(MSGEQ7.get(MSGEQ7_5), MSGEQ7.get(MSGEQ7_6));
+    bassVal = MSGEQ7.get(MSGEQ7_0);
+    midVal = max(MSGEQ7.get(MSGEQ7_2), MSGEQ7.get(MSGEQ7_3));
+    trebVal = max(max(MSGEQ7.get(MSGEQ7_4), MSGEQ7.get(MSGEQ7_5)), MSGEQ7.get(MSGEQ7_6));
 
     bassVal = remapNoise(bassVal);
     midVal = remapNoise(midVal);
