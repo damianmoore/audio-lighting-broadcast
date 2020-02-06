@@ -65,7 +65,7 @@ int remapNoise(int val) {
   if (val < 30) {
     val = 0;
   }
-  if (val < 60) {
+  if (val < 100) {
     val = val / 2;
   }
 
@@ -89,9 +89,9 @@ void calculateMultipliers() {
   Serial.println(maxLevels[0]);
   Serial.println(maxLevels[1]);
   Serial.println(maxLevels[2]);
-  levelMultipliers[0] = (255.0 / maxLevels[0]) * 1;
-  levelMultipliers[1] = (255.0 / maxLevels[1]) * 1.5;
-  levelMultipliers[2] = (255.0 / maxLevels[2]) * 3;
+  levelMultipliers[0] = min(((255.0 / maxLevels[0]) * 1), 100);
+  levelMultipliers[1] = min(((255.0 / maxLevels[1]) * 1.5), 100);
+  levelMultipliers[2] = min(((255.0 / maxLevels[2]) * 3), 100);
   Serial.println(levelMultipliers[0]);
   Serial.println(levelMultipliers[1]);
   Serial.println(levelMultipliers[2]);
