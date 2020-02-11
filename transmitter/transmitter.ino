@@ -3,8 +3,8 @@
 #include <NRFLite.h>
 
 #define pinAnalog A0
-#define pinReset A2
-#define pinStrobe A3
+#define pinReset A1
+#define pinStrobe A2
 #define MSGEQ7_INTERVAL ReadsPerSecond(200)
 #define MSGEQ7_SMOOTH 64 // Range: 0-255
 
@@ -48,8 +48,8 @@ uint8_t midScaled = 0;
 uint8_t trebScaled = 0;
 
 float bassColors[3] = {0, 1, 0.5};
-float midColors[3] = {1, 0.05, 0};
-float trebColors[3] = {1, 0, 0.5};
+float midColors[3] = {1, 0.2, 0};
+float trebColors[3] = {1, 0, 0.7};
 
 uint16_t maxLevels[3] = {0, 0, 0};
 float levelMultipliers[3] = {1.0, 1.0, 1.0};
@@ -90,8 +90,8 @@ void calculateMultipliers() {
   Serial.println(maxLevels[1]);
   Serial.println(maxLevels[2]);
   levelMultipliers[0] = min(((255.0 / maxLevels[0]) * 1), 100);
-  levelMultipliers[1] = min(((255.0 / maxLevels[1]) * 1.5), 100);
-  levelMultipliers[2] = min(((255.0 / maxLevels[2]) * 3), 100);
+  levelMultipliers[1] = min(((255.0 / maxLevels[1]) * 0.5), 100);
+  levelMultipliers[2] = min(((255.0 / maxLevels[2]) * 2), 100);
   Serial.println(levelMultipliers[0]);
   Serial.println(levelMultipliers[1]);
   Serial.println(levelMultipliers[2]);
