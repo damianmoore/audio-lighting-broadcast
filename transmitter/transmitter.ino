@@ -16,7 +16,9 @@ const static uint8_t DESTINATION_RADIO_ID = 0; // Id of the radio we will transm
 const static uint8_t PIN_RADIO_CE = 9;
 const static uint8_t PIN_RADIO_CSN = 10;
 
-#define pinLed 3
+#define pinLedBass 3
+#define pinLedMid 5
+#define pinLedTreb 6
 
 inline MSGEQ7_data_t mapNoise(MSGEQ7_data_t x,
                               MSGEQ7_data_t in_min = MSGEQ7_IN_MIN,
@@ -113,7 +115,9 @@ void setup() {
   MSGEQ7.begin();
 
   // led setup
-  pinMode(pinLed, OUTPUT);
+  pinMode(pinLedBass, OUTPUT);
+  pinMode(pinLedMid, OUTPUT);
+  pinMode(pinLedTreb, OUTPUT);
 
   //                                                      Bitrate                  Channel (0-125)
   if (!_radio.init(RADIO_ID, PIN_RADIO_CE, PIN_RADIO_CSN, NRFLite::BITRATE250KBPS, 27))
@@ -146,8 +150,10 @@ void loop() {
     midScaled = midVal * levelMultipliers[1];
     trebScaled = trebVal * levelMultipliers[2];
 
-    // Output PWM signal via LED to the music beat
-    analogWrite(pinLed, bassVal);
+    // Output PWM signal to LEDs
+    analogWrite(pinLedBass, bassVal);
+    analogWrite(pinLedMid, midVal);
+    analogWrite(pinLedTreb, trebVal);
 
     _radioData.BassRed = remapColor(0, bassScaled, 0);
     _radioData.BassGreen = remapColor(0, bassScaled, 1);

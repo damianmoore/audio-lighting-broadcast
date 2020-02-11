@@ -763,40 +763,40 @@ $EndComp
 $Comp
 L Connector_Generic:Conn_02x03_Odd_Even J5
 U 1 1 5E8614B4
-P 9250 5050
-F 0 "J5" H 9300 5367 50  0000 C CNN
-F 1 "Conn_02x03_Odd_Even" H 9300 5276 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 9250 5050 50  0001 C CNN
-F 3 "~" H 9250 5050 50  0001 C CNN
-	1    9250 5050
+P 9650 5350
+F 0 "J5" H 9700 5667 50  0000 C CNN
+F 1 "Conn_02x03_Odd_Even" H 9700 5576 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 9650 5350 50  0001 C CNN
+F 3 "~" H 9650 5350 50  0001 C CNN
+	1    9650 5350
 	1    0    0    -1  
 $EndComp
-Text GLabel 9050 4950 0    50   Input ~ 0
+Text GLabel 9450 5250 0    50   Input ~ 0
 MISO
-Text GLabel 9550 4950 2    50   Input ~ 0
+Text GLabel 9950 5250 2    50   Input ~ 0
 VTG
-Text GLabel 9050 5050 0    50   Input ~ 0
+Text GLabel 9450 5350 0    50   Input ~ 0
 SCK
-Text GLabel 9550 5050 2    50   Input ~ 0
+Text GLabel 9950 5350 2    50   Input ~ 0
 MOSI
-Text GLabel 9050 5150 0    50   Input ~ 0
+Text GLabel 9450 5450 0    50   Input ~ 0
 RST
 $Comp
 L power:GND #PWR0118
 U 1 1 5E865C55
-P 9600 5200
-F 0 "#PWR0118" H 9600 4950 50  0001 C CNN
-F 1 "GND" H 9605 5027 50  0000 C CNN
-F 2 "" H 9600 5200 50  0001 C CNN
-F 3 "" H 9600 5200 50  0001 C CNN
-	1    9600 5200
+P 10000 5500
+F 0 "#PWR0118" H 10000 5250 50  0001 C CNN
+F 1 "GND" H 10005 5327 50  0000 C CNN
+F 2 "" H 10000 5500 50  0001 C CNN
+F 3 "" H 10000 5500 50  0001 C CNN
+	1    10000 5500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9550 5150 9600 5150
+	9950 5450 10000 5450
 Wire Wire Line
-	9600 5150 9600 5200
-Text Notes 8950 4550 0    79   ~ 0
+	10000 5450 10000 5500
+Text Notes 9350 4850 0    79   ~ 0
 ICSP Header
 Text GLabel 6800 3600 2    50   Input ~ 0
 RST
@@ -852,12 +852,12 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0119
 U 1 1 5E43BBB8
-P 8100 4700
-F 0 "#PWR0119" H 8100 4450 50  0001 C CNN
-F 1 "GND" H 8105 4527 50  0000 C CNN
-F 2 "" H 8100 4700 50  0001 C CNN
-F 3 "" H 8100 4700 50  0001 C CNN
-	1    8100 4700
+P 8100 4950
+F 0 "#PWR0119" H 8100 4700 50  0001 C CNN
+F 1 "GND" H 8105 4777 50  0000 C CNN
+F 2 "" H 8100 4950 50  0001 C CNN
+F 3 "" H 8100 4950 50  0001 C CNN
+	1    8100 4950
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -877,7 +877,6 @@ Wire Wire Line
 	8100 4100 8100 4400
 Wire Wire Line
 	7950 4700 8100 4700
-Connection ~ 8100 4700
 Wire Wire Line
 	7950 4400 8100 4400
 Connection ~ 8100 4400
@@ -968,4 +967,14 @@ Wire Wire Line
 Wire Wire Line
 	8100 3800 8100 4100
 Connection ~ 8100 4100
+NoConn ~ 6800 3500
+NoConn ~ 6800 3900
+NoConn ~ 6800 4000
+NoConn ~ 6800 4200
+NoConn ~ 6800 4500
+NoConn ~ 6800 2100
+NoConn ~ 9550 2700
+Wire Wire Line
+	8100 4700 8100 4950
+Connection ~ 8100 4700
 $EndSCHEMATC

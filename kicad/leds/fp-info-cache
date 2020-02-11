@@ -1,4 +1,4 @@
-16934706440886209
+16937886622073209
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -75257,12 +75257,26 @@ varistor SIOV
 2
 2
 kicad-custom-parts
+3.5mm_Stereo_Jack
+Through hole straight pin header, 1x04, 1.00mm pitch, single row
+Through hole pin header THT 1x04 1.00mm single row
+0
+5
+5
+kicad-custom-parts
 LED_D5.0mm-4_RGB_swapped_pins
 LED, diameter 5.0mm, 2 pins, diameter 5.0mm, 3 pins, diameter 5.0mm, 4 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-154A4SUREQBFZGEW(Ver.9A).pdf
 LED diameter 5.0mm 2 pins diameter 5.0mm 3 pins diameter 5.0mm 4 pins RGB RGBLED
 0
 4
 4
+kicad-custom-parts
+MH-M18_Bluetooth_Audio
+Through hole straight pin header, 1x04, 1.00mm pitch, single row
+Through hole pin header THT 1x04 1.00mm single row
+0
+6
+6
 kicad-custom-parts
 Pin_Header_Straight_Simplified_1x04_Pitch2.54mm
 Through hole straight pin header, 1x06, 2.54mm pitch, single row
