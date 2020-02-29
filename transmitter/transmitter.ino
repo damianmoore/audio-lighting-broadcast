@@ -1,3 +1,14 @@
+// An audio signal is connected up to an MSGEQ7 spectrum analyser IC. This code
+// reads intensity values, grouping them into three channels (Bass, Mid and
+// Treb) and then calculates the Red, Green and Blue values for each at the
+// current moment in time. All the RGB values for all the channels are then
+// broadcasted out in a single packet using NRF24L01 tranciever. All receivers
+// decide for themselves which RGB values to use based on what channel they
+// have been configured to listen to. There are default RGB colours set in this
+// code for each channel but it also listens for new RGB values that can be
+// sent from a controller (also over the NRF24L01 radio).
+
+
 #include "MSGEQ7.h"
 #include <SPI.h>
 #include <NRFLite.h>
@@ -39,8 +50,17 @@ struct RadioPacket // Any packet up to 32 bytes can be sent.
     uint8_t TrebBlue;
 };
 
+struct RadioPacketReceive // Any packet up to 32 bytes can be sent.
+{
+    uint8_t Red;
+    uint8_t Green;
+    uint8_t Blue;
+    uint8_t Channel;
+};
+
 NRFLite _radio;
 RadioPacket _radioData;
+RadioPacketReceive _radioDataReceive;
 
 uint8_t bassVal = 0;
 uint8_t midVal = 0;
@@ -169,6 +189,28 @@ void loop() {
 
     if (millis() - lastMultiplierTime > 30000) {
       calculateMultipliers();
+    }
+
+    while (_radio.hasData()) {
+      Serial.println("Received colour control data");
+      Serial.println(_radioDataReceive.Channel);
+      _radio.readData(&_radioDataReceive); // Note how '&' must be placed in front of the variable name.
+
+      if (_radioDataReceive.Channel == 0) {  // Bass
+        bassColors[0] = float(_radioDataReceive.Red) / 255;
+        bassColors[1] = float(_radioDataReceive.Green) / 255;
+        bassColors[2] = float(_radioDataReceive.Blue) / 255;
+      }
+      if (_radioDataReceive.Channel == 1) {  // Bass
+        midColors[0] = float(_radioDataReceive.Red) / 255;
+        midColors[1] = float(_radioDataReceive.Green) / 255;
+        midColors[2] = float(_radioDataReceive.Blue) / 255;
+      }
+      if (_radioDataReceive.Channel == 2) {  // Bass
+        trebColors[0] = float(_radioDataReceive.Red) / 255;
+        trebColors[1] = float(_radioDataReceive.Green) / 255;
+        trebColors[2] = float(_radioDataReceive.Blue) / 255;
+      }
     }
 
 //    Serial.println(millis() - lastMillis);

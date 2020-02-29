@@ -1,3 +1,12 @@
+// Receivers listen using their NRF24L01 radio modules for packets containing
+// Red, Green and Blue light instensity values. It then outputs those RGB
+// values as PWM signals to LEDs. A receiver can be in one of three modes
+// which relate to the three different colours for Bass, Mid and Treb. On
+// first run a receiver is in Bass mode but the press of a button cycles it
+// through the three possible modes. A receiver remembers it's mode (using
+// EEPROM) so that it will be in the same mode when it is next powered on.
+
+
 #include <SPI.h>
 #include <EEPROM.h>
 #include <NRFLite.h>
@@ -130,19 +139,11 @@ void loop() {
     }
   }
 
-  // Prevents LEDs getting stuck on if receiver stops receiving data (out of range, transmitter malfunction etc.)
+  // Prevents LEDs getting stuck on if receiver stops receiving data (out of range, transmitter/receiver malfunction etc.)
   if (millis() - lastPacketTime > 1000) {
     digitalWrite(pinLedRed, LOW);
     digitalWrite(pinLedGreen, LOW);
     digitalWrite(pinLedBlue, LOW);
-  }
-
-  if (millis() - lastPacketTime > 10000) {
-    digitalWrite(pinLedRed, HIGH);
-    digitalWrite(pinLedGreen, LOW);
-    digitalWrite(pinLedBlue, LOW);
-    delay(50);
-    digitalWrite(pinLedRed, LOW);
     _radio.powerDown();
     initRadio();
   }
